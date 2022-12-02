@@ -16,8 +16,7 @@ services:
       image: chungjm0711/recommendation-service-database
       environment:
         - MARIADB_DATABASE=recommendation_service_db
-        - MARIADB_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-        - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+        - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
       volumes:
         - ./database/config:/etc/mysql/conf.d
       ports:
