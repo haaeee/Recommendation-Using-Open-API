@@ -1,4 +1,4 @@
-package com.example.recommendationservice.common.p6spy;
+package com.example.recommendationservice.global.p6spy;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;

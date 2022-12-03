@@ -1,6 +1,6 @@
-package com.example.recommendationservice.common.config;
+package com.example.recommendationservice.global.config;
 
-import com.example.recommendationservice.common.p6spy.CustomP6spySqlFormat;
+import com.example.recommendationservice.global.p6spy.CustomP6spySqlFormat;
 import com.p6spy.engine.spy.P6SpyOptions;
 import javax.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
