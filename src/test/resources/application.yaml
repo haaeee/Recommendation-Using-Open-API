@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:tc:mariadb:10:///
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}
