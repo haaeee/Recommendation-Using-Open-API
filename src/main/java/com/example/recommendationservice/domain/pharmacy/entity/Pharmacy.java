@@ -31,4 +31,8 @@ public class Pharmacy extends Place {
         this.pharmacyName = pharmacyName;
         this.pharmacyAddress = pharmacyAddress;
     }
+
+    public void changePharmacyAddress(String address) {
+        this.pharmacyAddress = address;
+    }
 }
