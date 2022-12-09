@@ -13,8 +13,7 @@ import lombok.Getter;
 @Entity
 public class Pharmacy extends Place {
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private String pharmacyName;

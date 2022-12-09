@@ -1,5 +1,6 @@
 package com.example.recommendationservice.domain.place.entity;
 
+import static javax.persistence.GenerationType.*;
 import static javax.persistence.InheritanceType.JOINED;
 
 import com.example.recommendationservice.global.entity.BaseEntity;
@@ -7,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import lombok.Getter;
@@ -17,8 +19,7 @@ import lombok.Getter;
 @Entity
 public abstract class Place extends BaseEntity {
 
-    @Id @GeneratedValue
-    @Column(name = "place_id")
+    @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private double latitude;
