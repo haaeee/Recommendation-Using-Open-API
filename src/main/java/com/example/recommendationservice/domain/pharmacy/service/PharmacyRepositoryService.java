@@ -32,9 +32,7 @@ public class PharmacyRepositoryService {
         entity.changePharmacyAddress(address);
     }
 
-    public List<PharmacyDto> findAll() {
-        return pharmacyRepository.findAll().stream()
-                .map(PharmacyDto::from)
-                .collect(toList());
+    public List<Pharmacy> findAll() {
+        return pharmacyRepository.findAll();
     }
 }
