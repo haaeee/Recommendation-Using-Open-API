@@ -47,8 +47,8 @@ class DirectionServiceTest extends Specification {
 
         then:
         result.size() == 2
-        result.get(0).targetName == "호수온누리약국"
-        result.get(1).targetName == "돌곶이온누리약국"
+        result.get(0).targetPlaceName == "호수온누리약국"
+        result.get(1).targetPlaceName == "돌곶이온누리약국"
 
     }
 
