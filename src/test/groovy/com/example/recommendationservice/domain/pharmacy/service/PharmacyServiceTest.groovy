@@ -78,4 +78,27 @@ class PharmacyServiceTest extends AbstractIntegrationContainerBaseTest {
         then:
         result.get(0).getPharmacyAddress() == address
     }
+
+    def "self invocation"() {
+        given:
+        String address = "서울특별시 성북구 보문동"
+        String name = "가까운 약국"
+        double latitude = 37.58
+        double longitude = 127.02
+
+        def pharmacy = Pharmacy.builder()
+                .pharmacyAddress(address)
+                .pharmacyName(name)
+                .latitude(latitude)
+                .longitude(longitude)
+                .build()
+
+        when:
+        pharmacyService.bar(Arrays.asList(pharmacy))
+
+        then:
+        def e = thrown(RuntimeException.class)
+        def result = pharmacyRepository.findAll()
+        result.size() == 1  // 트랜잭션이 적용되지 않는다. (롤백이 안됨)
+    }
 }
