@@ -17,14 +17,14 @@ public class PharmacyService {
 
     private final PharmacyRepository pharmacyRepository;
 
-    // self invocation test
+    // self invocation sovle
+    @Transactional
     public void bar(List<Pharmacy> pharmacyList) {
         log.info("bar CurrentTransactionName: " + TransactionSynchronizationManager.getCurrentTransactionName());
         foo(pharmacyList);
     }
 
-    // self invocation test
-    @Transactional
+    // self invocation sovle
     public void foo(List<Pharmacy> pharmacyList) {
         log.info("foo CurrentTransactionName: " + TransactionSynchronizationManager.getCurrentTransactionName());
         pharmacyList.forEach(pharmacy -> {

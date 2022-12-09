@@ -99,6 +99,6 @@ class PharmacyServiceTest extends AbstractIntegrationContainerBaseTest {
         then:
         def e = thrown(RuntimeException.class)
         def result = pharmacyRepository.findAll()
-        result.size() == 1  // 트랜잭션이 적용되지 않는다. (롤백이 안됨)
+        result.isEmpty()  // 트랜잭션이 적용되지 않는다. (롤백이 안됨)
     }
 }
