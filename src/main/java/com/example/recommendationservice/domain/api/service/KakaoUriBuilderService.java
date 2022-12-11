@@ -13,9 +13,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class KakaoUriBuilderService {
 
-    private final static String KAKAO_LOCAL_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/address.json";
+    private static final String KAKAO_LOCAL_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/address.json";
+    private static final String KAKAO_LOCAL_CATEGORY_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/category.json";
 
-    public URI buildUriByAddressSearch(final String address) {
+    public URI buildUriByAddressSearch(String address) {
         final URI uri = UriComponentsBuilder.fromHttpUrl(KAKAO_LOCAL_SEARCH_URL)
                 .queryParam("query", address)
                 .build()
@@ -23,6 +24,26 @@ public class KakaoUriBuilderService {
                 .toUri();
 
         log.info("[KakaoUriBuilderService$buildUriByAddressSearch] address: {}, uri: {}", address, uri);
+
+        return uri;
+    }
+
+    public URI buildUriByCategorySearch(String category, double latitude, double longitude, double radius) {
+
+        // km -> m
+        double meterRadius = 1000 * radius;
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(KAKAO_LOCAL_SEARCH_URL)
+                .queryParam("category_group_code", category)
+                .queryParam("x", longitude)
+                .queryParam("y", latitude)
+                .queryParam("radius", meterRadius)
+                .queryParam("sort", "distance")
+                .build()
+                .encode()
+                .toUri();
+
+        log.info("[KakaoUriBuilderService$buildUriByCategorySearch] uri: {}", uri);
 
         return uri;
     }
