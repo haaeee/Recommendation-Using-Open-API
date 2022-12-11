@@ -3,7 +3,9 @@ package com.example.recommendationservice.domain.direction.service;
 import static java.util.stream.Collectors.toList;
 
 import com.example.recommendationservice.domain.api.dto.DocumentDto;
+import com.example.recommendationservice.domain.api.service.KakaoCategorySearchService;
 import com.example.recommendationservice.domain.direction.entity.Direction;
+import com.example.recommendationservice.domain.direction.repository.DirectionRepository;
 import com.example.recommendationservice.domain.pharmacy.service.PharmacySearchService;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 @Slf4j
 @Service
@@ -24,6 +27,8 @@ public class DirectionService {
     private static final double RADIUS_KM = 10.0;  // 반경 10KM
 
     private final PharmacySearchService pharmacySearchService;
+    private final DirectionRepository directionRepository;
+    private final KakaoCategorySearchService kakaoCategorySearchService;
 
     /**
      * <h3>약국 데이터 중 가까운 3곳을 생성하는 메서드</h3>
@@ -55,7 +60,38 @@ public class DirectionService {
                 .sorted(Comparator.comparing(Direction::getDistance))
                 .limit(MAX_SEARCH_COUNT)
                 .collect(toList());
+    }
 
+    @Transactional
+    public List<Direction> saveAll(List<Direction> directions) {
+        if (CollectionUtils.isEmpty(directions)) {
+            return Collections.emptyList();
+        }
+        return directionRepository.saveAll(directions);
+    }
+
+    public List<Direction> buildDirectionsByCategoryApi(DocumentDto inputDocumentDto) {
+
+        if (Objects.isNull(inputDocumentDto)) {
+            return Collections.emptyList();
+        }
+
+        return kakaoCategorySearchService.requestPharmacyCategorySearch(inputDocumentDto.getLatitude(),
+                        inputDocumentDto.getLongitude(), RADIUS_KM)
+                .getDocumentDtos().stream()
+                .map(resultDocumentDto ->
+                        Direction.builder()
+                                .inputAddress(inputDocumentDto.getAddressName())
+                                .inputLatitude(inputDocumentDto.getLatitude())
+                                .inputLongitude(inputDocumentDto.getLongitude())
+                                .targetPlaceName(resultDocumentDto.getPlaceName())
+                                .targetAddress(resultDocumentDto.getAddressName())
+                                .targetLatitude(resultDocumentDto.getLatitude())
+                                .targetLongitude(resultDocumentDto.getLongitude())
+                                .distance(resultDocumentDto.getDistance() * 0.001) // km 단위
+                                .build())
+                .limit(MAX_SEARCH_COUNT)
+                .collect(toList());
     }
 
     /**
