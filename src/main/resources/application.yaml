@@ -13,6 +13,8 @@ spring:
   config:
     activate:
       on-profile: common
+  thymeleaf3:
+    decoupled-logic: true
 
 kakao:
   rest:
@@ -34,7 +36,7 @@ spring:
     port: 6379
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 ---
 spring:
