@@ -1,0 +1,14 @@
+.grid-image, .h2-title {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    margin: 0 0 5px;
+    width: 70%;
+    height: 550px;
+}
+a {
+    text-decoration: none;
+    font-size: 12px;
+}

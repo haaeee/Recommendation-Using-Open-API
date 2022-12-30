@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head id="head">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="Jongmin Chung">
+    <!-- 모바일에서 디자인이 축소되지 않게 하기 위한 코드 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>약국 추천 서비스</title>
+    <link rel="stylesheet" href="/css/lib/result.css">
+    <!-- 폰트어썸 불러오기 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+
+    <!-- bootstrap 불러오기 -->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+
+    <style>
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'GmarketSansMedium';
+        }
+    </style>
+
+    <link rel="stylesheet" href="/css/lib/result.css">
+</head>
+
+<body>
+<div>
+    <h2 class="h2-title">약국 추천 결과 💊</h2>
+</div>
+
+<table class="table table-hover" id="result">
+    <thead>
+    <tr>
+        <th>약국명</th>
+        <th>약국 주소</th>
+        <th>거리</th>
+        <th>길안내 링크</th>
+        <th>로드뷰 링크</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="name">추천된 약국명</td>
+        <td class="address">추천된 약국주소</td>
+        <td class="distance">추천 약국 거리</td>
+        <td class="direction-url"><a href="javascript:void(0)">길안내 URL</a></td>
+        <td class="road-view-url"><a href="javascript:void(0)">로드뷰 URL</a></td>
+    </tr>
+    </tbody>
+</table>
+<div class="grid-image">
+    <img src="/images/kakao.png" alt="kakao" class="img-responsive img-rounded">
+</div>
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
+
+</body>
+</html>

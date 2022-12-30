@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<thlogic>
+    <!--<#header: id, header: element, .header: class&ndash;&gt;-->
+    <attr sel="#footer" th:replace="footer :: footer"/>
+    <attr sel="tbody" th:remove="all-but-first">
+        <attr sel="tr[0]" th:each="resultDto : ${resultDtos}">
+            <attr sel="td.name" th:text="${resultDto.pharmacyName}" />
+            <attr sel="td.address" th:text="${resultDto.pharmacyAddress}" />
+            <attr sel="td.distance" th:text="${resultDto.distance}" />
+            <attr sel="td.direction-url/a" th:text="${resultDto.directionUrl}" th:href="${resultDto.directionUrl}"/>
+            <attr sel="td.road-view-url/a" th:text="${resultDto.roadViewUrl}" th:href="${resultDto.roadViewUrl}"/>
+        </attr>
+    </attr>
+</thlogic>
