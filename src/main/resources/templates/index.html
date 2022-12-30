@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head id="head">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="Jongmin Chung">
+    <!-- 모바일에서 디자인이 축소되지 않게 하기 위한 코드 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>약국 추천 서비스</title>
+
+    <!-- 폰트어썸 불러오기 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+
+    <!-- bootstrap 불러오기 -->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+
+    <style>
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'GmarketSansMedium';
+        }
+    </style>
+
+    <link rel="stylesheet" href="/css/lib/main.css">
+</head>
+<body>
+<div>
+    <div>
+        <div class="container">
+            <div class="mt-5">
+                <h2>약국 추천 서비스 💊</h2>
+            </div>
+            <div class="body">
+                <form action="/search" method="post" id="search-form">
+                    <div>
+                        <label id="search-label" for="address">주소를 입력하시면 주소 기준으로 가까운 약국의 위치 최대 3곳 추천드립니다.</label>
+                        <input type="text" class="form-control" id="address_kakao" name="address"
+                               placeholder="주소(지번 또는 도로명)를 입력하세요. ex) 서울특별시 성북구 종암로 10길" readonly>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" id="btn-save">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="grid-image" style="display: flex; justify-content: center;">
+                <img src="/images/map.png" alt="map" class="img-responsive img-rounded"
+                     style="margin: 20px 0 20px; width: 50%; height: 450px;">
+                <img src="/images/road.png" alt="road" class="img-responsive img-rounded"
+                     style="margin: 20px 0 20px; width: 50%; height: 450px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    <hr>
+    푸터 삽입부
+</footer>
+
+<!--부트스트랩 js, jquery 추가-->
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
+
+<!-- Kakao 우편번호 서비스 -->
+<!-- https://postcode.map.daum.net/guide -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    window.onload = function () {
+        document.getElementById("address_kakao")
+            .addEventListener("click", () => {
+                new daum.Postcode({
+                    oncomplete: function (data) {
+                        document.getElementById("address_kakao").value = data.address;
+                    }
+                }).open();
+            });
+    }
+</script>
+
+</body>
+</html>
